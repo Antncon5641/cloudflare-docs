@@ -42,7 +42,9 @@ Instructs the client to direct all DNS queries to a specific [Gateway DNS locati
 
 **Value:** Your <GlossaryTooltip term="DoH subdomain">DoH subdomain</GlossaryTooltip>.
 
-## Optional fields
+## Organization parameters
+
+You can use the following parameters to configure a specific Zero Trust organization.
 
 ### `auth_client_id`
 
@@ -87,13 +89,6 @@ If switch has been turned off by user, the client will automatically turn itself
 This parameter replaces the old `enabled` property, which can no longer be used in conjunction with the new `switch_locked` and `auto_connect`. If you want to use these parameters, you must remove `enabled`.
 :::
 
-### `configs`
-
-Allows a user to [switch between Zero Trust organizations](/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/switch-organizations/) in the WARP client GUI. The `configs` array is also required when using a top-level parameter such as [`pre-login`](#pre_login) or [`multi-user`](#multi_user), even if only one organization is specified.
-
-**Value Type:** `array`
-
-**Value:** An array containing one or more Zero Trust organizations.
 
 ### `display_name`
 
@@ -102,17 +97,6 @@ Identifies a Zero Trust organization in the WARP GUI when WARP is deployed with 
 **Value Type:** `string`
 
 **Value:** Organization nickname shown to users in the WARP GUI (for example, `Test environment`).
-
-### `multi_user`
-
-Enables multiple user registrations on a Windows device.
-
-**Value Type:** `boolean`
-
-**Value:**
-
-* `false` — (default) Only one WARP registration is stored per device. After a user logs in to WARP, their settings and identity will apply to all traffic from the device.
-* `true` — Each Windows user has their own WARP registration. For more information, refer to [Multiple users on a Windows device](/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
 
 ### `onboarding`
 
@@ -160,10 +144,6 @@ This functionality is intended for use with a Cloudflare China local network par
 **Value:** `203.0.113.0:500` — Redirect all WARP traffic to `203.0.113.0` on port `500`.
 
 The string must be a valid IPv4 or IPv6 socket address (containing the IP address and port number), otherwise the WARP client will fail to parse the entire MDM file.
-
-### `pre_login`
-
-Allows WARP to connect with a service token before a user completes the initial Windows login. For more information, refer to [Connect WARP before Windows login](/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-prelogin/).
 
 ### `service_mode`
 
@@ -224,4 +204,29 @@ Assigns a unique identifier to the device for the [device UUID posture check](/c
 
 **Value:** UUID for the device (for example, `496c6124-db89-4735-bc4e-7f759109a6f1`).
 
+## Top-level parameters
 
+Top-level parameters determine how WARP manages device registrations.
+
+### `configs`
+
+Allows a user to [switch between Zero Trust organizations](/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/switch-organizations/) in the WARP client GUI. The `configs` array is also required when using another [top-level parameter](#top-level-parameters) such as `multi_user` or `pre_login`, even if only one organization is specified.
+
+**Value Type:** `array`
+
+**Value:** An array containing one or more Zero Trust organizations.
+
+### `multi_user`
+
+Enables multiple user registrations on a Windows device.
+
+**Value Type:** `boolean`
+
+**Value:**
+
+* `false` — (default) Only one WARP registration is stored per device. After a user logs in to WARP, their settings and identity will apply to all traffic from the device.
+* `true` — Each Windows user has their own WARP registration. For more information, refer to [Multiple users on a Windows device](/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
+
+### `pre_login`
+
+Allows WARP to connect with a service token before a user completes the initial Windows login. For more information, refer to [Connect WARP before Windows login](/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-prelogin/).
