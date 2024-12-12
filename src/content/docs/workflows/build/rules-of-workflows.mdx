@@ -236,6 +236,8 @@ export class MyWorkflow extends WorkflowEntrypoint {
 		  // Access to userData here
 			// Will always be the same if this step is retried
 		})
+	}
+}
 ```
 </TypeScriptExample>
 
@@ -274,6 +276,8 @@ export class MyWorkflow extends WorkflowEntrypoint {
 				return await env.KV.get(cat)
 			})
 		}
+	}
+}
 ```
 </TypeScriptExample>
 
