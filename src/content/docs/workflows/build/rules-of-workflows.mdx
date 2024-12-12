@@ -232,7 +232,7 @@ export class MyWorkflow extends WorkflowEntrypoint {
 		  return await env.KV.get(event.user)
 		})
 
-		let someOtherData await step.do("following step that uses that state", async () => {
+		let someOtherData = await step.do("following step that uses that state", async () => {
 		  // Access to userData here
 			// Will always be the same if this step is retried
 		})
@@ -277,7 +277,7 @@ export class MyWorkflow extends WorkflowEntrypoint {
 			})
 		}
 	}
-}
+	}}}
 ```
 </TypeScriptExample>
 
